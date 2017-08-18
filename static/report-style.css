@@ -1,0 +1,100 @@
+html,
+body {
+  padding: 4px;
+  margin: 0px;
+  font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: RGB(51, 51, 51);
+  background-color: #fff;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Report table */
+
+.report,
+.report td,
+.report th {
+  border: 1px solid RGB(224, 241, 233);
+}
+
+.report th {
+  padding: 4px;
+  color: #fff;
+  background-color: RGB(29, 157, 116);
+}
+
+.report td {
+  padding: 0px 4px;
+}
+
+.report td.num {
+  text-align: center;
+}
+
+.report td.path {
+}
+
+.report th.size,
+.report td.size {
+  text-align: right;
+}
+
+.report td.status {
+  text-align: center;
+}
+
+.report tr.odd {
+  background-color: RGB(241, 249, 247);
+}
+
+.report tr.highlight td.status {
+  background-color: RGB(240, 210, 0);
+}
+
+.report tr:hover {
+  background-color: RGB(230, 230, 230);
+}
+
+/* Duplicates table */
+
+.duplicates {
+  margin: 4px 0px;
+}
+
+.duplicates,
+.duplicates td,
+.duplicates th {
+  border: 1px solid RGB(238, 238, 238);
+}
+
+.duplicates th {
+  padding: 4px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 80%;
+  text-align: right;
+  color: RGB(113, 118, 124);
+  background-color: RGB(250, 250, 250);
+}
+
+.duplicates td {
+  padding: 0px 4px;
+  width: 20%;
+}
+
+.duplicates .main-info {
+  font-weight: bold;
+}
+
+.duplicates .secondary-info {
+  font-size: 80%;
+  text-align: right;
+}
+
+.duplicates .red {
+  color: RGB(204, 51, 0);
+}
