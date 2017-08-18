@@ -59,6 +59,10 @@ table {
   background-color: RGB(230, 230, 230);
 }
 
+.report tr.info td {
+  padding: 8px 6px;
+}
+
 /* Duplicates table */
 
 .duplicates {

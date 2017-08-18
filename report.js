@@ -17,10 +17,10 @@ module.exports = function(fileData, onComplete) {
       const rows = files
         .map(
           file =>
-            `<tr class="main-info"><td colspan="5">${file.pathName}</td></tr>` +
+            `<tr class="main-info"><td colspan="4">${file.pathName}</td></tr>` +
             '<tr class="secondary-info">' +
             `<td>${file.birthtime.YYYYMMDDHHMMSS()}</td>` +
-            `<td>${file.atime.YYYYMMDDHHMMSS()}</td>` +
+            // `<td>${file.atime.YYYYMMDDHHMMSS()}</td>` +
             `<td>${file.mtime.YYYYMMDDHHMMSS()}</td>` +
             `<td>${file.ctime.YYYYMMDDHHMMSS()}</td>` +
             `<td>${numberWithCommas(file.size)} bytes</td>` +
@@ -32,7 +32,7 @@ module.exports = function(fileData, onComplete) {
         '  <thead>' +
         '    <tr>' +
         '      <th>Created</th>' +
-        '      <th>Access</th>' +
+        // '      <th>Access</th>' +
         '      <th>Modifyed</th>' +
         '      <th>Change</th>' +
         '      <th>Size (bytes)</th>' +
@@ -51,8 +51,15 @@ module.exports = function(fileData, onComplete) {
       return parts.join('.');
     }
 
+    const maxCount = 1000;
+    const isSimplified = fileData.fileCount >= maxCount;
+    // Only show duplicated files when file count is equal or larget than maxCount
+    const keys = isSimplified
+      ? Object.keys(fileData.hash).filter(key => fileData.hash[key].count > 1)
+      : Object.keys(fileData.hash);
+
     // Sort the fileData for output
-    const sortedKeys = Object.keys(fileData.hash).sort((a, b) => {
+    const sortedKeys = keys.sort((a, b) => {
       const countA = fileData.hash[a].count;
       const countB = fileData.hash[b].count;
       if (countA === countB) {
@@ -77,7 +84,7 @@ module.exports = function(fileData, onComplete) {
     });
 
     // Table rows
-    const trs = sortedKeys
+    let trs = sortedKeys
       .map((key, index) => {
         const row = fileData.hash[key];
 
@@ -103,6 +110,11 @@ module.exports = function(fileData, onComplete) {
       })
       .join('');
 
+    if (isSimplified) {
+      trs += `<tr class="info"><td colspan=4>${fileData.fileCount -
+        keys.length} files not included in the report as they have no duplicates.</td></tr>`;
+    }
+
     const html = data
       .replace('${dateTime}', new Date())
       .replace('${trs}', trs)
@@ -115,9 +127,11 @@ module.exports = function(fileData, onComplete) {
       }
 
       // Copy the style file
+      /*
       fs
         .createReadStream('./static/report-style.css')
         .pipe(fs.createWriteStream('./output/style.css'));
+        */
 
       if (typeof onComplete === 'function') {
         onComplete();
