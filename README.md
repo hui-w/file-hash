@@ -1,5 +1,6 @@
 
 # File Hash
+A Node.js command line utility for finding out duplicated files within the specified directory
 
 ## How to use
 
