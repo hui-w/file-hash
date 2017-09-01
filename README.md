@@ -7,6 +7,6 @@ A Node.js command line utility for finding out duplicated files within the speci
 - Clone or download the repository to your computer
 - Down and install Node.js if you havn't done this before
   - https://nodejs.org/
-- Open the terminal and type "npm start -- [START_PATH]"
+- Open the terminal and type "npm start -- [START_DIRECTORY]"
   - For example: npm start -- ../../medias/photos/
 - When it's done, you may check the report file in "./output"
